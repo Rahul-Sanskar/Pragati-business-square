@@ -1,0 +1,3 @@
+# Netlify rewrites — serve the site cleanly at root without /godrej-verano.com/ in the URL
+/*    /godrej-verano.com/:splat    200
+/     /godrej-verano.com/index938a.html    200
