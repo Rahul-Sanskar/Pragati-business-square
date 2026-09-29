@@ -19,9 +19,9 @@
     
     <link
       rel="stylesheet"
-      href="../cdn.jsdelivr.net/npm/slick-carousel%401.8.1/slick/slick.css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-    <link rel="stylesheet" href="css/style2b04.css?var=0.2" />
+    <link rel="stylesheet" href="css/style2b04.css?var=0.4" />
     <style>
       .modal-form__submit.is-submitting {
         opacity: 0.7;
@@ -120,61 +120,62 @@
 
       <main>
         <section class="hero" id="hero">
+          <div class="hero-slider" aria-label="Business Square hero" aria-live="polite">
+            <div class="hero-slide hero-slide--single" data-slide="1">
+              <picture>
+                <source media="(min-width: 1180px)" srcset="assets/images/hero/D1.png 1x" />
+                <img src="assets/images/hero/M1.png" srcset="assets/images/hero/M1.png 1x" alt="Business Square — MIDC Nerul Navi Mumbai" loading="eager" fetchpriority="high" decoding="async" />
+              </picture>
+            </div>
+          </div>
           <div class="hero-backdrop"></div>
-          <div class="container hero-grid">
-            <div class="hero-copy">
-                <span class="btn eoi-pill">EOI OPEN</span>
-              <p class="eyebrow">MIDC, Nerul, Navi Mumbai</p>
-              <h1>
-                <span class="hero-line hero-line--top">Elevate Your</span>
-                <span class="hero-line hero-line--middle"><span>Business</span> Address.</span>
-                <span class="hero-line hero-line--bottom">In The Heart of Navi Mumbai.</span>
-              </h1>
-              <p class="hero-description">
-                Premium commercial spaces combining world-class office environments and vibrant
-                retail destinations — crafted for visionary businesses.
-              </p>
 
-              <div class="mobile-hero-actions">
-                <span class="hero-badge">Premium Office &amp; Retail Spaces</span>
-                <div class="price-pill mobile-price">Starting From <strong>₹1 Cr* Onwards</strong></div>
-                <div class="mobile-cta-row">
-                  <button class="btn btn-solid lead-trigger" type="button" data-form-trigger>
-                    Book Exclusive Preview
-                  </button>
+          <div class="hero-carousel-layer">
+            <div class="container hero-grid">
+              <div class="hero-copy">
+                <h1>
+                  <span class="hero-line hero-line--top">Premium Grade A+<br />Commercial Tower</span>
+                  <span class="hero-line hero-line--middle"><span>Business</span> Square.</span>
+                </h1>
+                <p class="hero-description">
+                  MIDC, Nerul, Navi Mumbai &nbsp;·&nbsp; Offices &amp; Signature Retail &nbsp;·&nbsp; Starting ₹1 Cr*
+                </p>
+
+                <div class="hero-cta-row hero-cta-row--desktop">
+                  <a href="tel:8828386497" class="btn btn-solid">Speak With Meet Thumar</a>
                   <button class="btn btn-outline-light js-brochure-trigger lead-trigger" type="button" data-form-trigger>
-                    Download Brochure
+                    Download Project Brief
                   </button>
                 </div>
-              </div>
 
-              <div class="hero-features">
-                <article class="hero-feature">
-                  <img
-                    src="public/assets/business-square/gallery/11-office-interior.png"
-                    alt="Premium Office Spaces"
-                    loading="lazy"
-                    style="display:none;"
-                  />
-                  <h3>Grade A+</h3>
-                  <p>Premium Office Spaces</p>
-                </article>
-                <article class="hero-feature">
-                  <h3>High-Street</h3>
-                  <p>Retail Destinations</p>
-                </article>
-                <article class="hero-feature">
-                  <h3>G+29</h3>
-                  <p>Iconic Commercial Tower</p>
-                </article>
-                <article class="hero-feature">
-                  <h3>MIDC</h3>
-                  <p>Nerul, Navi Mumbai</p>
-                </article>
-              </div>
+                <div class="mobile-hero-actions">
+                  <span class="hero-badge">G+29 Iconic Tower</span>
+                  <div class="price-pill mobile-price">Starting From <strong>₹1 Cr*</strong></div>
+                  <div class="mobile-cta-row">
+                    <a href="tel:8828386497" class="btn btn-solid" style="text-decoration:none;">Call Meet Thumar</a>
+                    <button class="btn btn-outline-light js-brochure-trigger lead-trigger" type="button" data-form-trigger>
+                      Download Brief
+                    </button>
+                  </div>
+                </div>
 
-              <div class="price-pill desktop-price">Starting From <strong>₹1 Cr*</strong></div>
-            </div>
+                <div class="hero-features">
+                  <article class="hero-feature">
+                    <h3>Grade A+ Offices</h3>
+                    <p>Upper Tower Floors</p>
+                  </article>
+                  <article class="hero-feature">
+                    <h3>Signature Retail</h3>
+                    <p>7 Podium Shops</p>
+                  </article>
+                  <article class="hero-feature">
+                    <h3>G+29 Tower</h3>
+                    <p>10 High-Speed Elevators</p>
+                  </article>
+                </div>
+
+                <div class="price-pill desktop-price">Starting From <strong>₹1 Cr*</strong></div>
+              </div>
 
             <aside class="enquiry-card" id="enquiry">
               <div class="enquiry-card__content">
@@ -320,11 +321,12 @@
   </div>
 
   <small class="d-block mt-2">
-    Your information is safe with us.
-  </small>
+                  Your information is safe with us.
+                </small>
 </form>
               </div>
             </aside>
+            </div>
           </div>
         </section>
 
@@ -919,8 +921,8 @@
 </form>
     </template>
 
-    <script src="../cdn.jsdelivr.net/npm/jquery%403.7.1/dist/jquery.min.js"></script>
-    <script src="../cdn.jsdelivr.net/npm/slick-carousel%401.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
    
     <script src="js/script2b04.js?var=0.1"></script>
     <script>

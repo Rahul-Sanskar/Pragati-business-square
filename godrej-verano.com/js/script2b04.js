@@ -341,38 +341,177 @@
     });
   }
 
-  if (galleryTrack && window.jQuery && typeof window.jQuery.fn.slick === "function") {
-    window.jQuery(galleryTrack).slick({
-      infinite: true,
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      arrows: true,
-      dots: false,
-      autoplay: false,
-      responsive: [
-        {
-          breakpoint: 1180,
-          settings: {
-            slidesToShow: 4,
+  // --- Gallery slider: separated try/catch so failure can't break hero init ---
+  try {
+    if (galleryTrack && window.jQuery && typeof window.jQuery.fn.slick === "function") {
+      window.jQuery(galleryTrack).slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        autoplay: false,
+        responsive: [
+          { breakpoint: 1180, settings: { slidesToShow: 4 } },
+          { breakpoint: 860,  settings: { slidesToShow: 2 } },
+          {
+            breakpoint: 560,
+            settings: {
+              slidesToShow: 1,
+              centerMode: true,
+              centerPadding: "24px",
+            },
           },
-        },
-        {
-          breakpoint: 860,
-          settings: {
-            slidesToShow: 2,
-          },
-        },
-        {
-          breakpoint: 560,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            centerPadding: "24px",
-          },
-        },
-      ],
-    });
+        ],
+      });
+    }
+  } catch (err) {
+    // Fail silently for gallery only
+    if (window.console && console.warn) console.warn("Gallery slick init skipped:", err);
   }
+
+  // --- Hero carousel (D1/D2/D3 desktop, M1/M2/M3 mobile via <picture>) ---
+  function initHeroCarousel() {
+    var heroSlider = document.querySelector(".hero-slider");
+    if (!heroSlider) return;
+    if (!(window.jQuery && typeof window.jQuery.fn.slick === "function")) {
+      heroSlider.classList.add("hero-slider--fallback");
+      return;
+    }
+
+    var $hero = window.jQuery(heroSlider);
+    if ($hero.hasClass("slick-initialized")) return;
+
+    var $dotsContainer = document.querySelector(".hero-dots");
+    var $prev = document.querySelector(".hero-nav--prev");
+    var $next = document.querySelector(".hero-nav--next");
+
+    // Minimal, battle-tested Slick 1.8.1 config that always works with fade
+    try {
+      $hero.slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        cssEase: "ease-out",
+        speed: 900,
+        autoplay: true,
+        autoplaySpeed: 6500,
+        pauseOnHover: true,
+        pauseOnFocus: true,
+        arrows: false,
+        dots: false,
+        draggable: true,
+        swipe: true,
+        touchThreshold: 12,
+        accessibility: true,
+        waitForAnimate: true,
+        adaptiveHeight: false,
+        responsive: [
+          {
+            breakpoint: 1180,
+            settings: { autoplay: true, arrows: false, dots: false },
+          },
+        ],
+      });
+    } catch (err) {
+      if (window.console && console.warn) console.warn("Hero slick init failed:", err);
+      heroSlider.classList.add("hero-slider--fallback");
+      return;
+    }
+
+    // --- Wire up EXTERNAL custom arrows manually (not inside slick) ---
+    if ($prev) {
+      $prev.addEventListener("click", function (event) {
+        event.preventDefault();
+        try { $hero.slick("slickPrev"); } catch (e) {}
+      });
+    }
+    if ($next) {
+      $next.addEventListener("click", function (event) {
+        event.preventDefault();
+        try { $hero.slick("slickNext"); } catch (e) {}
+      });
+    }
+
+    // --- Build custom dots into the standalone .hero-dots UL (external) ---
+    if ($dotsContainer) {
+      var totalSlides = 3; // D1/D2/D3 == M1/M2/M3
+      $dotsContainer.innerHTML = "";
+      for (var i = 0; i < totalSlides; i++) {
+        var li = document.createElement("li");
+        if (i === 0) li.className = "slick-active";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-label", "Go to slide " + (i + 1));
+        btn.textContent = String(i + 1);
+        (function (idx) {
+          btn.addEventListener("click", function (event) {
+            event.preventDefault();
+            try { $hero.slick("slickGoTo", idx); } catch (e) {}
+          });
+        })(i);
+        li.appendChild(btn);
+        $dotsContainer.appendChild(li);
+      }
+
+      // Sync active dot on slick change
+      $hero.on("beforeChange.heroDots", function (evt, slick, currentSlide, nextSlide) {
+        var all = $dotsContainer.querySelectorAll("li");
+        for (var d = 0; d < all.length; d++) {
+          all[d].classList.toggle("slick-active", d === nextSlide);
+        }
+      });
+    }
+
+    // --- Pause autoplay on touch, resume afterwards ---
+    var touchResumeTimer = null;
+    heroSlider.addEventListener(
+      "touchstart",
+      function () {
+        try { $hero.slick("slickPause"); } catch (e) {}
+      },
+      { passive: true }
+    );
+    heroSlider.addEventListener(
+      "touchend",
+      function () {
+        if (touchResumeTimer) clearTimeout(touchResumeTimer);
+        touchResumeTimer = setTimeout(function () {
+          try { $hero.slick("slickPlay"); } catch (e) {}
+        }, 1200);
+      },
+      { passive: true }
+    );
+
+    // --- Debug visibility to user console (first load only) ---
+    try {
+      var s1src = document.querySelector('.hero-slide[data-slide="1"] img') || document.querySelector('.hero-slide[data-slide="1"] source');
+      var s2src = document.querySelector('.hero-slide[data-slide="2"] img') || document.querySelector('.hero-slide[data-slide="2"] source');
+      var s3src = document.querySelector('.hero-slide[data-slide="3"] img') || document.querySelector('.hero-slide[data-slide="3"] source');
+      console.log("[Business Square hero carousel] READY", {
+        slides: {
+          1: s1src ? (s1src.getAttribute("srcset") || s1src.getAttribute("src")) : "missing",
+          2: s2src ? (s2src.getAttribute("srcset") || s2src.getAttribute("src")) : "missing",
+          3: s3src ? (s3src.getAttribute("srcset") || s3src.getAttribute("src")) : "missing",
+        },
+        hasSlick: !!window.jQuery.fn.slick,
+        init: $hero.hasClass("slick-initialized"),
+      });
+    } catch (e) {}
+  }
+
+  // Run immediately (if DOM & jQuery ready)
+  initHeroCarousel();
+
+  // Retry once after 250ms to cover script-order race conditions
+  window.setTimeout(initHeroCarousel, 250);
+
+  // Retry after load event as final safety net (in case of deferred jQuery)
+  window.addEventListener("load", function () {
+    window.setTimeout(initHeroCarousel, 50);
+  });
 
   galleryPrev.addEventListener("click", () => stepGallery(-1));
   galleryNext.addEventListener("click", () => stepGallery(1));
