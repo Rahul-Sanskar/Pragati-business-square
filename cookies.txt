@@ -1,4 +1,0 @@
-# HTTrack Website Copier Cookie File
-# This file format is compatible with Netscape cookies
-godrej-verano.com	TRUE	/	FALSE	1999999999	PHPSESSID	bbe01b3387959086ed41fcf0c5427969
-
