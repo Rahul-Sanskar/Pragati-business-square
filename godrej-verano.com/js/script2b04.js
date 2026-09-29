@@ -297,12 +297,12 @@
         '<figcaption style="margin-top:20px; padding:16px 20px; background:#FBF8F1; border-left:3px solid #b8954f; border-radius:0 4px 4px 0; color:#4b5a6a; font-size:0.84rem; line-height:1.65; text-align:left;">' +
           '<strong style="color:#0f1f2c;">Disclaimer:</strong> Floor plans are indicative and for illustration only. ' +
           '<strong>Plans are tentative and subject to approval from MIDC.</strong> ' +
-          'Speak with Meet Thumar for the latest approved drawings — <a href="tel:8828386497" style="color:#0f1f2c; font-weight:700;">+91 8828386497</a>.' +
+          'Contact our team for the latest approved drawings — <a href="tel:8828386497" style="color:#0f1f2c; font-weight:700;">+91 8828386497</a>.' +
         '</figcaption>' +
       '</figure>' +
       '<div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">' +
         '<button type="button" class="btn lead-trigger" data-form-trigger style="min-width:220px;">Request Approved Drawings</button> ' +
-        '<a href="tel:8828386497" class="btn btn-dark" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; min-width:220px;">Call Meet Thumar</a>' +
+        '<a href="tel:8828386497" class="btn btn-dark" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; min-width:220px;">Call Our Team</a>' +
       '</div>'
     );
     universalModal.classList.add('is-open');
