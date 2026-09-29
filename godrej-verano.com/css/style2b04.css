@@ -1417,16 +1417,20 @@ body.is-loaded .enquiry-card__content {
 }
 
 .location-card {
-  padding: 48px 52px 52px;
-  border-radius: 12px;
+  padding: 58px 56px 60px;
+  border-radius: 14px;
   background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
   color: #fff;
   transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  border: 1px solid rgba(184, 149, 79, 0.15);
-  box-shadow: 0 22px 56px rgba(10, 22, 32, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(184, 149, 79, 0.2);
+  box-shadow: 0 26px 64px rgba(10, 22, 32, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .location-card::before {
@@ -1442,9 +1446,9 @@ body.is-loaded .enquiry-card__content {
 
 .panel-label {
   color: var(--gold);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1rem;
   text-transform: uppercase;
 }
 
@@ -1454,12 +1458,14 @@ body.is-loaded .enquiry-card__content {
 
 .location-card h2,
 .about-card h2 {
-  margin-top: 18px;
-  font-size: clamp(2.8rem, 4vw, 4.8rem);
-  line-height: 1;
+  margin-top: 22px;
+  font-size: clamp(3.2rem, 4.6vw, 5.4rem);
+  line-height: 0.98;
   font-family: "Cormorant Garamond", serif;
   font-weight: 600;
   letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 100%;
 }
 
 .location-card__copy,
@@ -1468,29 +1474,64 @@ body.is-loaded .enquiry-card__content {
 }
 
 .location-card__copy {
-  max-width: 640px;
+  max-width: 720px;
   color: rgba(255, 255, 255, 0.86);
-  font-size: 1.08rem;
-  line-height: 1.8;
-  margin-top: 16px;
+  font-size: 1.15rem;
+  line-height: 1.85;
+  margin-top: 22px;
+  text-align: center;
 }
 
 .location-points {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 32px;
-  margin: 34px 0 38px;
-  padding: 28px 28px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(184, 149, 79, 0.12);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 40px 0 42px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(184, 149, 79, 0.14);
   backdrop-filter: blur(6px);
+  width: 100%;
+  align-self: center;
 }
 
 .location-points article {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 0;
+  padding: 34px 20px 32px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(184, 149, 79, 0.1);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  text-align: center;
+  min-height: 152px;
+}
+
+.location-points article::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(184, 149, 79, 0.18) 0%, rgba(184, 149, 79, 0.06) 45%, transparent 72%);
+  pointer-events: none;
+}
+
+.location-points article:hover,
+.location-points article:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(184, 149, 79, 0.3);
+  background: linear-gradient(180deg, rgba(184, 149, 79, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
 }
 
 .location-points img {
@@ -1507,24 +1548,34 @@ body.is-loaded .enquiry-card__content {
   margin: 0;
 }
 
+.location-points article > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
 .location-points h3 {
-  font-size: 1.7rem;
+  font-size: 2.1rem;
   text-transform: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   color: var(--gold-soft);
   font-family: "Cormorant Garamond", serif;
   font-weight: 700;
   line-height: 1;
+  margin-top: 12px;
+  text-shadow: 0 2px 14px rgba(184, 149, 79, 0.22);
 }
 
 .location-points p {
-  margin-top: 6px;
+  margin-top: 10px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 0.95rem;
-  line-height: 1.45;
-  letter-spacing: 0.04em;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
+  max-width: 170px;
 }
 
 .about-card {
@@ -2315,6 +2366,12 @@ body.is-loaded .enquiry-card__content {
     text-align: center;
   }
 
+  .location-card {
+    padding: 40px 28px 42px;
+    align-items: center;
+    text-align: center;
+  }
+
   .highlights-grid {
     grid-template-columns: 1fr;
     
@@ -2360,27 +2417,53 @@ body.is-loaded .enquiry-card__content {
 
   .location-points {
     grid-template-columns: 1fr 1fr;
-    gap: 20px 18px;
+    gap: 14px;
+    margin: 32px 0 34px;
+    padding: 12px;
+    width: 100%;
   }
 
   .location-points article {
-    align-items: flex-start;
-    gap: 14px;
-    padding-inline: 8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 28px 14px 26px;
+    min-height: 136px;
+    text-align: center;
+  }
+
+  .location-points article::before {
+    width: 36px;
+    height: 36px;
+    top: 14px;
   }
 
   .location-points img {
     width: 28px;
     height: 28px;
-    margin-top: 2px;
+  }
+
+  .location-points article > div {
+    align-items: center;
   }
 
   .location-points h3 {
-    font-size: 1.05rem;
+    font-size: 1.6rem;
+    margin-top: 8px;
   }
 
   .location-points p {
-    font-size: 0.84rem;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+    max-width: 140px;
+  }
+
+  .location-card .btn,
+  .about-card .btn {
+    width: auto;
+    min-width: 260px;
   }
 
   .about-stats {
@@ -2409,6 +2492,7 @@ body.is-loaded .enquiry-card__content {
   .location-card .btn,
   .about-card .btn {
     width: 100%;
+    max-width: 320px;
   }
 
   .gallery-action,
@@ -2423,6 +2507,41 @@ body.is-loaded .enquiry-card__content {
 
   .cta-banner__content {
     padding: 48px 0;
+  }
+
+  .location-card h2 {
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
+    margin-top: 16px;
+  }
+
+  .location-card__copy {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  .location-points {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 28px 0 30px;
+    padding: 10px;
+  }
+
+  .location-points article {
+    padding: 24px 12px 22px;
+    min-height: 124px;
+  }
+
+  .location-points h3 {
+    font-size: 1.45rem;
+  }
+
+  .location-points p {
+    font-size: 0.76rem;
+    max-width: 130px;
   }
 
   .lightbox__dialog {
@@ -2531,6 +2650,54 @@ body.is-loaded .enquiry-card__content {
   .hero-dots li button { width: 18px; }
   .hero-dots li.slick-active button { width: 32px; }
   .enquiry-card__content h2 { font-size: 1.55rem; }
+
+  .location-card {
+    padding: 32px 20px 36px;
+  }
+
+  .location-points {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 8px;
+    margin: 24px 0 28px;
+  }
+
+  .location-points article {
+    padding: 22px 10px 20px;
+    min-height: 116px;
+  }
+
+  .location-points article::before {
+    width: 30px;
+    height: 30px;
+    top: 12px;
+  }
+
+  .location-points h3 {
+    font-size: 1.35rem;
+    margin-top: 6px;
+  }
+
+  .location-points p {
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    max-width: 120px;
+    margin-top: 6px;
+  }
+
+  .location-card h2 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .location-card__copy {
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .location-card .btn {
+    width: 100% !important;
+    min-width: 0;
+  }
 }
 
   .highlights-stats,
