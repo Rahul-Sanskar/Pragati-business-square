@@ -4,12 +4,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Business Square — Office &amp; Retail · MIDC Nerul, Navi Mumbai</title>
+    <title>Commercial Property in Nerul MIDC | The Business Square | ₹1 Crore onwards</title>
     <meta
       name="description"
-      content="Business Square at MIDC Nerul, Navi Mumbai. Grade A+ offices &amp; podium retail from ₹1 Cr*."
+      content="Explore premium commercial property in Nerul MIDC, Navi Mumbai. The Business Square offers commercial spaces for sale starting from ₹1 Crore onwards, ideal for business and investment."
     />
+    <meta name="keywords" content="Commercial Property in Nerul, Commercial Property in Nerul MIDC, Commercial Shops in Nerul, Commercial Space in Nerul, Commercial Office Space in Nerul, Commercial Property in Navi Mumbai, Commercial Shops in Navi Mumbai, Commercial Investment in Navi Mumbai, Commercial Property for Sale in Nerul, Commercial Space for Sale in Nerul MIDC, Commercial Shop for Sale in Nerul, Office Space for Sale in Nerul, Commercial Space for Sale in Navi Mumbai, Shops for Sale in Nerul MIDC, Commercial Property under 1 Crore in Navi Mumbai, Commercial Property under 1 Crore in Nerul, Commercial Shops under 1 Crore in Navi Mumbai, Commercial Property 1 Crore onwards, Ready Commercial Property in Nerul, Commercial Property in Juinagar, Commercial Property in Sanpada, Commercial Property in Vashi, Commercial Property in Seawoods, Commercial Property in CBD Belapur, Commercial Property near Nerul Railway Station, Commercial Property near Juinagar Railway Station, Commercial Property in Navi Mumbai MIDC, Commercial Investment Property in Navi Mumbai, Commercial Investment in Nerul, Best Commercial Property in Navi Mumbai, High Growth Commercial Property Navi Mumbai, Commercial Property Investment Nerul, Investment Property in Nerul MIDC, Commercial Real Estate Investment Navi Mumbai" />
     <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Commercial Property in Nerul MIDC | The Business Square | ₹1 Crore onwards" />
+    <meta property="og:description" content="Explore premium commercial property in Nerul MIDC, Navi Mumbai. The Business Square offers commercial spaces for sale starting from ₹1 Crore onwards, ideal for business and investment." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link
@@ -33,9 +40,59 @@
         margin-top: 2em;
         display: flex;
         justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
       }
       .price-pill {
         color: #fff;
+      }
+      /* ---- Property Layout Section ---- */
+      .layout-section { background: var(--bg); }
+
+      .layout-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 2rem;
+      }
+
+      .layout-thumb {
+        position: relative;
+        border: none;
+        padding: 0;
+        background: #fff;
+        border-radius: var(--radius-md, 10px);
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        aspect-ratio: 3 / 4;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .layout-thumb:hover,
+      .layout-thumb:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(10, 22, 32, 0.14);
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+
+      .layout-thumb img {
+        width: 100%;
+        flex: 1;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        min-height: 0;
+      }
+
+      @media (max-width: 600px) {
+        .layout-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
       }
     </style>
   </head>
@@ -45,6 +102,7 @@
         <div class="container header-inner">
           <nav class="site-nav" aria-label="Primary">
             <a href="#discover">Discover</a>
+            <a href="#layout">Layout</a>
             <a href="#highlights">Highlights</a>
             <a href="#location">Location</a>
           </nav>
@@ -96,6 +154,7 @@
           </div>
           <nav class="mobile-nav">
             <a href="#discover">Project</a>
+            <a href="#layout">Layout</a>
             <a href="#highlights">Highlights</a>
             <a href="#location">Location</a>
             <a href="#enquiry">Enquire</a>
@@ -282,7 +341,7 @@
 
               <article class="media-card lead-trigger" role="button" tabindex="0" data-form-trigger>
                 <div class="media-card__image">
-                  <img src="assets/images/hero/D2.png" alt="Business Square Lobby" loading="lazy" />
+                  <img src="assets/images/Modern Neutral Corporate Lobby.png" alt="Business Square Lobby" loading="lazy" />
                 </div>
                 <div class="media-card__body">
                   <h3>Lobby</h3>
@@ -292,7 +351,7 @@
 
               <article class="media-card lead-trigger" role="button" tabindex="0" data-form-trigger>
                 <div class="media-card__image">
-                  <img src="assets/images/hero/D3.png" alt="Business Square Offices" loading="lazy" />
+                  <img src="assets/images/Modern Open-Plan Office Workspace.png" alt="Business Square Offices" loading="lazy" />
                 </div>
                 <div class="media-card__body">
                   <h3>Offices</h3>
@@ -302,7 +361,7 @@
 
               <article class="media-card lead-trigger" role="button" tabindex="0" data-form-trigger>
                 <div class="media-card__image">
-                  <img src="assets/images/hero/D1.png" alt="Business Square Retail" loading="lazy" />
+                  <img src="assets/images/Modern Shopping Arcade at Dusk.png" alt="Business Square Retail" loading="lazy" />
                 </div>
                 <div class="media-card__body">
                   <h3>Retail</h3>
@@ -310,11 +369,57 @@
                 </div>
               </article>
             </div>
-            <div class="dw-bro">
-              <button class="btn btn-solid lead-trigger" type="button" data-form-trigger>Download Brief</button>
+
+          </div>
+        </section>
+
+        <!-- ===== PROPERTY LAYOUT SECTION ===== -->
+        <section class="layout-section section" id="layout">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Property Layout</h2>
+            </div>
+            <div class="layout-grid">
+              <button class="layout-thumb" type="button" data-layout-index="0" aria-label="View layout image 1">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0004.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="1" aria-label="View layout image 2">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0005.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="2" aria-label="View layout image 3">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0006.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="3" aria-label="View layout image 4">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0007.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="4" aria-label="View layout image 5">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0008.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="5" aria-label="View layout image 6">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0009.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="6" aria-label="View layout image 7">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0010.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="7" aria-label="View layout image 8">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0011.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="8" aria-label="View layout image 9">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0012.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="9" aria-label="View layout image 10">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0013.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="10" aria-label="View layout image 11">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0014.jpg" alt="Property Layout" loading="lazy" />
+              </button>
+              <button class="layout-thumb" type="button" data-layout-index="11" aria-label="View layout image 12">
+                <img src="assets/images/property layout/Business Square D-397_Updated (1)_page-0015.jpg" alt="Property Layout" loading="lazy" />
+              </button>
             </div>
           </div>
         </section>
+        <!-- ===== END PROPERTY LAYOUT SECTION ===== -->
 
         <section class="highlights section" id="highlights">
           <div class="container highlights-grid">
@@ -391,6 +496,10 @@
             </div>
           </div>
         </section>
+        <!-- SEO keyword block — hidden visually, readable by crawlers -->
+        <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+          <p>Commercial Property in Nerul MIDC, Navi Mumbai. Commercial shops for sale in Nerul. Office space for sale in Nerul MIDC. Commercial space in Navi Mumbai starting from ₹1 Crore onwards. Premium commercial investment property near Nerul Railway Station and Juinagar Railway Station. Commercial property in Vashi, Sanpada, Seawoods, CBD Belapur and Navi Mumbai MIDC. Ready commercial property under 1 Crore in Navi Mumbai. Best commercial real estate investment in Nerul MIDC. High growth commercial property Navi Mumbai. The Business Square — Grade A+ commercial tower, MIDC Nerul, Navi Mumbai.</p>
+        </div>
       </main>
     </div>
 
@@ -523,6 +632,20 @@
       </form>
     </template>
 
+    <!-- Layout Lightbox -->
+    <div class="lightbox" id="layoutLightbox" aria-hidden="true">
+      <div class="modal__backdrop" data-close-layout></div>
+      <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="layoutLightboxTitle">
+        <button class="modal__close" type="button" aria-label="Close layout view" data-close-layout>×</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="layoutPrev" type="button" aria-label="Previous page">‹</button>
+        <div class="lightbox__content">
+          <h2 id="layoutLightboxTitle" class="modal__title"></h2>
+          <img class="lightbox__image" id="layoutLightboxImg" src="#" alt="" />
+        </div>
+        <button class="lightbox__nav lightbox__nav--next" id="layoutNext" type="button" aria-label="Next page">›</button>
+      </div>
+    </div>
+
     <script src="cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="js/script2b04.js?var=0.1"></script>
@@ -537,6 +660,79 @@
             submitButton.textContent = 'Submitting...';
           }
         });
+      });
+
+
+      // Layout lightbox
+      const layoutImages = [
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0004.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0005.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0006.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0007.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0008.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0009.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0010.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0011.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0012.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0013.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0014.jpg',
+        'assets/images/property layout/Business Square D-397_Updated (1)_page-0015.jpg',
+      ];
+      const layoutLightbox  = document.getElementById('layoutLightbox');
+      const layoutLightboxImg = document.getElementById('layoutLightboxImg');
+      const layoutTitle     = document.getElementById('layoutLightboxTitle');
+      const layoutPrev      = document.getElementById('layoutPrev');
+      const layoutNext      = document.getElementById('layoutNext');
+      let layoutIndex       = 0;
+      let layoutTouchStartX = 0;
+
+      function setLayoutSlide(i) {
+        layoutIndex = (i + layoutImages.length) % layoutImages.length;
+        layoutLightboxImg.src = layoutImages[layoutIndex];
+        layoutLightboxImg.alt = 'Property Layout';
+        layoutTitle.textContent = 'Property Layout';
+      }
+
+      function openLayoutLightbox(i) {
+        setLayoutSlide(i);
+        layoutLightbox.classList.add('is-open');
+        layoutLightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      }
+
+      function closeLayoutLightbox() {
+        layoutLightbox.classList.remove('is-open');
+        layoutLightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+
+      document.querySelectorAll('.layout-thumb').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          openLayoutLightbox(parseInt(btn.dataset.layoutIndex, 10));
+        });
+      });
+
+      layoutPrev.addEventListener('click', function() { setLayoutSlide(layoutIndex - 1); });
+      layoutNext.addEventListener('click', function() { setLayoutSlide(layoutIndex + 1); });
+
+      layoutLightbox.addEventListener('click', function(e) {
+        if (e.target.hasAttribute('data-close-layout')) closeLayoutLightbox();
+      });
+
+      layoutLightbox.addEventListener('touchstart', function(e) {
+        layoutTouchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      layoutLightbox.addEventListener('touchend', function(e) {
+        const diff = e.changedTouches[0].screenX - layoutTouchStartX;
+        if (Math.abs(diff) >= 40) setLayoutSlide(layoutIndex + (diff > 0 ? -1 : 1));
+      }, { passive: true });
+
+      document.addEventListener('keydown', function(e) {
+        if (!layoutLightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape')      closeLayoutLightbox();
+        if (e.key === 'ArrowLeft')   setLayoutSlide(layoutIndex - 1);
+        if (e.key === 'ArrowRight')  setLayoutSlide(layoutIndex + 1);
       });
     </script>
   </body>
