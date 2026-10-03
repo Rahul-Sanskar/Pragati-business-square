@@ -338,7 +338,11 @@
                 <h2>Enquire Now</h2>
                 <p>Share your details. Our team will connect shortly.</p>
 
-                <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="#" novalidate>
+                <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="https://formspree.io/f/theredbricks" novalidate>
+                  <!-- Formspree config -->
+                  <input type="hidden" name="_subject" value="New Enquiry — The Business Square, Nerul MIDC" />
+                  <input type="hidden" name="_to" value="theredbricks.in@gmail.com" />
+                  <input type="hidden" name="_next" value="" />
                   <!-- Tracking / hidden fields -->
                   <input type="hidden" name="utm_source" value="" />
                   <input type="hidden" name="utm_medium" value="" />
@@ -674,7 +678,11 @@
     <div class="toast" id="toast" aria-live="polite"></div>
 
     <template id="leadFormTemplate">
-      <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="#" novalidate>
+      <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="https://formspree.io/f/theredbricks" novalidate>
+        <!-- Formspree config -->
+        <input type="hidden" name="_subject" value="New Enquiry — The Business Square, Nerul MIDC" />
+        <input type="hidden" name="_to" value="theredbricks.in@gmail.com" />
+        <input type="hidden" name="_next" value="" />
         <!-- Tracking / hidden fields -->
         <input type="hidden" name="utm_source" value="" />
         <input type="hidden" name="utm_medium" value="" />
@@ -785,14 +793,62 @@
     <script src="js/script2b04.js?var=0.1"></script>
     <script>
       document.querySelectorAll('.modal-form').forEach(function (form) {
-        form.addEventListener('submit', function () {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
           if (!form.checkValidity()) return;
+
           const submitButton = form.querySelector('.modal-form__submit');
           if (submitButton) {
             submitButton.classList.add('is-submitting');
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
           }
+
+          const data = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          })
+          .then(function (response) {
+            if (response.ok) {
+              form.reset();
+              if (submitButton) {
+                submitButton.textContent = '✓ Submitted!';
+                submitButton.style.background = '#2d6a4f';
+              }
+              // Close modal after 1.8s if inside one
+              setTimeout(function () {
+                var modal = form.closest('.modal');
+                if (modal) {
+                  modal.classList.remove('is-open');
+                  modal.setAttribute('aria-hidden', 'true');
+                  document.body.classList.remove('modal-open');
+                }
+                if (submitButton) {
+                  submitButton.classList.remove('is-submitting');
+                  submitButton.disabled = false;
+                  submitButton.textContent = 'Submit';
+                  submitButton.style.background = '';
+                }
+              }, 1800);
+            } else {
+              if (submitButton) {
+                submitButton.classList.remove('is-submitting');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit';
+              }
+              alert('Something went wrong. Please try again or call us directly.');
+            }
+          })
+          .catch(function () {
+            if (submitButton) {
+              submitButton.classList.remove('is-submitting');
+              submitButton.disabled = false;
+              submitButton.textContent = 'Submit';
+            }
+            alert('Network error. Please check your connection and try again.');
+          });
         });
       });
 
