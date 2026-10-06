@@ -756,8 +756,9 @@ button {
 
 .price-pill {
   display: inline-flex;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
   padding: 16px 26px;
   margin-top: 28px;
   border: 1px solid rgba(184, 149, 79, 0.55);
@@ -775,6 +776,20 @@ button {
   color: var(--gold-soft);
   font-size: 2.5rem;
   letter-spacing: 0.01em;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
+  line-height: 1;
+}
+
+.price-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.65);
+  line-height: 1;
+  margin-bottom: 4px;
+}
   font-family: "Cormorant Garamond", serif;
   font-weight: 700;
   text-shadow: 0 2px 16px rgba(184, 149, 79, 0.35);
@@ -2649,7 +2664,7 @@ body.is-loaded .enquiry-card__content {
   .hero-description  { font-size: 0.8rem; margin: 12px 0 16px; }
   .hero-badge        { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.12em; }
   .mobile-price      { padding: 14px 16px; }
-  .mobile-price strong { font-size: 1.65rem; }
+  .mobile-price strong { font-size: 1.9rem; }
   .mobile-cta-row .btn { min-height: 52px; font-size: 0.78rem; }
   .hero-features     { grid-template-columns: 1fr; }
   .hero-feature      { padding: 12px 14px; min-height: auto; }
