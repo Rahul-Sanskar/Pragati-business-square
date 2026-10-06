@@ -783,13 +783,22 @@ button {
   font-weight: 800;
 }
 
+.price-num {
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: "Manrope", sans-serif;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-block;
+}
+
 .price-label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: rgba(255,255,255,0.65);
 }
-}
+
 
 .mobile-hero-actions,
 .mobile-price {
@@ -2661,6 +2670,7 @@ body.is-loaded .enquiry-card__content {
   .hero-badge        { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.12em; }
   .mobile-price      { padding: 14px 16px; }
   .mobile-price strong { font-size: 1.9rem; }
+  .mobile-price .price-num { font-size: 2.3rem; }
   .mobile-cta-row .btn { min-height: 52px; font-size: 0.78rem; }
   .hero-features     { grid-template-columns: 1fr; }
   .hero-feature      { padding: 12px 14px; min-height: auto; }
@@ -2798,4 +2808,4 @@ body.is-loaded .enquiry-card__content {
     margin-bottom: 4px;
     font-size: 0.78rem;
   }
-}
+
