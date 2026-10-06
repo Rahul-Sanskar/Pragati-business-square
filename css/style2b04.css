@@ -1889,6 +1889,13 @@ body.is-loaded .enquiry-card__content {
   background: #eff4f5;
   font-size: 1.8rem;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .modal__title {

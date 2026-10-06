@@ -320,13 +320,13 @@
   }
 
   universalModal.addEventListener("click", (event) => {
-    if (event.target.hasAttribute("data-close-modal")) {
+    if (event.target.closest("[data-close-modal]")) {
       closeUniversalModal();
     }
   });
 
   formModal.addEventListener("click", (event) => {
-    if (event.target.hasAttribute("data-close-form-modal")) {
+    if (event.target.closest("[data-close-form-modal]")) {
       pendingLeadAction = null;
       closeFormModal();
     }
@@ -517,7 +517,7 @@
   galleryNext.addEventListener("click", () => stepGallery(1));
 
   galleryLightbox.addEventListener("click", (event) => {
-    if (event.target.hasAttribute("data-close-gallery")) {
+    if (event.target.closest("[data-close-gallery]")) {
       closeGallery();
     }
   });

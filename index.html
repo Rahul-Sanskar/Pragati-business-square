@@ -56,7 +56,7 @@
           "name": "The Business Square — Commercial Property in Nerul MIDC, Navi Mumbai",
           "description": "Premium Grade A+ commercial property for sale in Nerul MIDC, Navi Mumbai. Office spaces and retail shops starting from ₹1 Crore onwards. G+29 commercial tower with high-speed elevators, rooftop terrace, and 5-level parking.",
           "url": "https://business-square.in",
-          "image": "assets/images/hero/D1.png",
+          "image": "assets/images/hero/D2.png",
           "offers": {
             "@type": "Offer",
             "priceCurrency": "INR",
@@ -78,7 +78,7 @@
           "name": "The Business Square",
           "description": "Grade A+ commercial tower offering office spaces and retail shops for sale in Nerul MIDC, Navi Mumbai. Starting from ₹1 Crore onwards.",
           "url": "https://business-square.in",
-          "image": "assets/images/hero/D1.png",
+          "image": "assets/images/hero/D2.png",
           "priceRange": "₹₹₹",
           "telephone": "",
           "address": {
@@ -412,8 +412,8 @@
           <div class="hero-slider" aria-label="Business Square hero" aria-live="polite">
             <div class="hero-slide hero-slide--single" data-slide="1">
               <picture>
-                <source media="(min-width: 1180px)" srcset="assets/images/hero/D1.png 1x" />
-                <img src="assets/images/hero/M1.png" srcset="assets/images/hero/M1.png 1x" alt="Business Square — MIDC Nerul Navi Mumbai" loading="eager" fetchpriority="high" decoding="async" />
+                <source media="(min-width: 1180px)" srcset="assets/images/hero/D2.png 1x" />
+                <img src="assets/images/hero/M2.png" srcset="assets/images/hero/M2.png 1x" alt="Business Square — MIDC Nerul Navi Mumbai" loading="eager" fetchpriority="high" decoding="async" />
               </picture>
             </div>
           </div>
@@ -471,11 +471,9 @@
                 <h2>Enquire Now</h2>
                 <p>Share your details. Our team will connect shortly.</p>
 
-                <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="https://formspree.io/f/theredbricks" novalidate>
-                  <!-- Formspree config -->
-                  <input type="hidden" name="_subject" value="New Enquiry — The Business Square, Nerul MIDC" />
-                  <input type="hidden" name="_to" value="theredbricks.in@gmail.com" />
-                  <input type="hidden" name="_next" value="" />
+                <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="contact.php" novalidate>
+                  <!-- Hostinger PHP mail handler -->
+                  <input type="hidden" name="subject" value="New Enquiry — The Business Square, Nerul MIDC" />
                   <!-- Tracking / hidden fields -->
                   <input type="hidden" name="utm_source" value="" />
                   <input type="hidden" name="utm_medium" value="" />
@@ -580,7 +578,7 @@
             <div class="discover-grid">
               <article class="media-card lead-trigger" role="button" tabindex="0" data-form-trigger>
                 <div class="media-card__image">
-                  <img src="assets/images/hero/D1.png" alt="Business Square Tower" loading="lazy" />
+                  <img src="assets/images/hero/D2.png" alt="Business Square Tower" loading="lazy" />
                 </div>
                 <div class="media-card__body">
                   <h3>Tower</h3>
@@ -912,11 +910,9 @@
     <div class="toast" id="toast" aria-live="polite"></div>
 
     <template id="leadFormTemplate">
-      <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="https://formspree.io/f/theredbricks" novalidate>
-        <!-- Formspree config -->
-        <input type="hidden" name="_subject" value="New Enquiry — The Business Square, Nerul MIDC" />
-        <input type="hidden" name="_to" value="theredbricks.in@gmail.com" />
-        <input type="hidden" name="_next" value="" />
+      <form method="post" class="gpl-form modal-form frmContactus" name="frmContactus" action="contact.php" novalidate>
+        <!-- Hostinger PHP mail handler -->
+        <input type="hidden" name="subject" value="New Enquiry — The Business Square, Nerul MIDC" />
         <!-- Tracking / hidden fields -->
         <input type="hidden" name="utm_source" value="" />
         <input type="hidden" name="utm_medium" value="" />
@@ -1039,19 +1035,22 @@
           }
 
           const data = new FormData(form);
-          fetch(form.action, {
+          fetch('contact.php', {
             method: 'POST',
             body: data,
-            headers: { 'Accept': 'application/json' }
           })
           .then(function (response) {
-            if (response.ok) {
+            return response.json().then(function(json) {
+              return { ok: response.ok, json: json };
+            });
+          })
+          .then(function (result) {
+            if (result.ok && result.json.success) {
               form.reset();
               if (submitButton) {
                 submitButton.textContent = '✓ Submitted!';
                 submitButton.style.background = '#2d6a4f';
               }
-              // Close modal after 1.8s if inside one
               setTimeout(function () {
                 var modal = form.closest('.modal');
                 if (modal) {
@@ -1072,7 +1071,7 @@
                 submitButton.disabled = false;
                 submitButton.textContent = 'Submit';
               }
-              alert('Something went wrong. Please try again or call us directly.');
+              alert(result.json.message || 'Something went wrong. Please try again or call us directly.');
             }
           })
           .catch(function () {
@@ -1140,7 +1139,7 @@
       layoutNext.addEventListener('click', function() { setLayoutSlide(layoutIndex + 1); });
 
       layoutLightbox.addEventListener('click', function(e) {
-        if (e.target.hasAttribute('data-close-layout')) closeLayoutLightbox();
+        if (e.target.closest('[data-close-layout]')) closeLayoutLightbox();
       });
 
       layoutLightbox.addEventListener('touchstart', function(e) {
