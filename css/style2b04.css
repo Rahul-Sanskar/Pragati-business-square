@@ -777,14 +777,14 @@ button {
   font-size: 2.5rem;
   letter-spacing: 0.06em;
   line-height: 1;
-  font-family: "Oswald", sans-serif;
-  font-weight: 700;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
 }
 
 .price-num {
   font-size: 2.5rem;
-  font-weight: 700;
-  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-family: "Anton", sans-serif;
   vertical-align: middle;
   line-height: 1;
   display: inline-block;
