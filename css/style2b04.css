@@ -775,20 +775,13 @@ button {
 .price-pill strong {
   color: var(--gold-soft);
   font-size: 2.5rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   line-height: 1;
-  font-family: "Anton", sans-serif;
+  font-family: Impact, "Arial Narrow", "Arial Black", sans-serif;
   font-weight: 400;
+  font-style: normal;
 }
 
-.price-num {
-  font-size: 2.5rem;
-  font-weight: 400;
-  font-family: "Anton", sans-serif;
-  vertical-align: middle;
-  line-height: 1;
-  display: inline-block;
-}
 
 .price-label {
   font-size: 0.75rem;
