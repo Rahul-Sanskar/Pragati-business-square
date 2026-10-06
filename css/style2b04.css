@@ -756,9 +756,9 @@ button {
 
 .price-pill {
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
   padding: 16px 26px;
   margin-top: 28px;
   border: 1px solid rgba(184, 149, 79, 0.55);
@@ -784,13 +784,10 @@ button {
 }
 
 .price-label {
-  display: block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: rgba(255,255,255,0.65);
-  line-height: 1;
-  margin-bottom: 4px;
 }
   font-family: "Cormorant Garamond", serif;
   font-weight: 700;
