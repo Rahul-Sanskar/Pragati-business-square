@@ -789,9 +789,6 @@ button {
   letter-spacing: 0.14em;
   color: rgba(255,255,255,0.65);
 }
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 700;
-  text-shadow: 0 2px 16px rgba(184, 149, 79, 0.35);
 }
 
 .mobile-hero-actions,
