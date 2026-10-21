@@ -2,23 +2,83 @@
 <html lang="en">
   
 <head>
-    <!-- Google tag (gtag.js) — Google Ads AW-18471400653 -->
+    <!-- Google tag (gtag.js) — Google Ads base tag AW-18471400653.
+         Installed once in the shared <head>. Base tag only: no conversion
+         is sent here and no visitor data is included. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18471400653"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-18471400653');
+    </script>
 
-      // Google Ads conversion — "Submit lead form"
-      // Replace PLACEHOLDER_LABEL with the conversion label from Google Ads
-      // (Goals → Conversions → "Submit lead form" → Tag setup).
-      window.BS_ADS_SUBMIT_LEAD_SEND_TO = 'AW-18471400653/PLACEHOLDER_LABEL';
+    <!-- ==========================================================================
+         GOOGLE ADS CONVERSION CONFIGURATION — SINGLE SOURCE OF TRUTH
+         Conversion action : "Business Square – Successful Enquiry"
+         Conversion type   : Lead form submission (enquiry form)
 
-      // Called only after the enquiry form is confirmed submitted by contact.php
-      window.trackSubmitLeadFormConversion = function () {
-        if (typeof gtag !== 'function') return;
-        gtag('event', 'conversion', { send_to: window.BS_ADS_SUBMIT_LEAD_SEND_TO });
+         All values below were copied verbatim from the Google Ads account.
+         Do not substitute another ID or label.
+
+         If `conversionLabel` is ever blanked out, the base tag still loads,
+         the site and the enquiry form work exactly as before, and NO
+         conversion event is sent — a placeholder label can never fire.
+
+         A conversion ID/label is public information (it is visible in the page
+         source of any site that uses it), so nothing secret is exposed here.
+         Server credentials (SMTP passwords, API keys) are never placed in
+         front-end JavaScript.
+         ========================================================================== -->
+    <script>
+      window.BS_GOOGLE_ADS = {
+        // Must remain identical to the id= parameter of the Google tag loader above.
+        conversionId: 'AW-18471400653',
+        // Conversion action "Business Square – Successful Enquiry":
+        // Google Ads → Goals → Conversions → Tag setup.
+        conversionLabel: 'vSijCP3I1qQdEM3p7OdE',
+        // Fixed nominal lead value for this conversion action.
+        conversionValue: 1.0,
+        currency: 'INR'
+      };
+
+      // True only when a genuine label has been configured.
+      window.bsAdsConversionIsConfigured = function () {
+        var cfg = window.BS_GOOGLE_ADS || {};
+        var label = typeof cfg.conversionLabel === 'string' ? cfg.conversionLabel.trim() : '';
+        if (!cfg.conversionId || !label) return false;
+        // Defensive guard: never treat a placeholder as a real label.
+        if (/PLACEHOLDER|CONVERSION_LABEL|YOUR_/i.test(label)) return false;
+        return true;
+      };
+
+      // Fires the "Business Square – Successful Enquiry" conversion.
+      // Call ONLY after the backend has confirmed a successful enquiry.
+      // `submissionId` is the one-time id returned by contact.php and is used
+      // to guarantee one conversion per successful submission.
+      // No personal data is sent to Google — only the conversion destination,
+      // the fixed nominal value and the currency.
+      var bsAdsConversionFired = false;
+      window.trackSubmitLeadFormConversion = function (submissionId) {
+        if (bsAdsConversionFired) return false;
+        if (!window.bsAdsConversionIsConfigured()) return false;
+        if (typeof gtag !== 'function') return false;
+
+        var key = (typeof submissionId === 'string' && submissionId) ? 'bs_ads_conv_' + submissionId : null;
+        try {
+          if (key && window.sessionStorage && window.sessionStorage.getItem(key)) return false;
+          if (key && window.sessionStorage) window.sessionStorage.setItem(key, '1');
+        } catch (e) {
+          // Storage unavailable (private mode / blocked) — the in-page guard still applies.
+        }
+
+        bsAdsConversionFired = true;
+        gtag('event', 'conversion', {
+          send_to: window.BS_GOOGLE_ADS.conversionId + '/' + window.BS_GOOGLE_ADS.conversionLabel.trim(),
+          value: window.BS_GOOGLE_ADS.conversionValue,
+          currency: window.BS_GOOGLE_ADS.currency
+        });
+        return true;
       };
     </script>
     <meta charset="UTF-8" />
@@ -1044,6 +1104,11 @@
       // Shared enquiry submit flow — used by the inline enquiry card form and by
       // the modal form cloned from #leadFormTemplate at runtime.
       function submitEnquiryForm(form) {
+        // Guard against duplicate submissions (double click, repeated callbacks).
+        // The disabled button alone is not sufficient protection.
+        if (form.dataset.bsSubmitting === '1') return;
+        form.dataset.bsSubmitting = '1';
+
         const submitButton = form.querySelector('.modal-form__submit');
         if (submitButton) {
           submitButton.classList.add('is-submitting');
@@ -1062,6 +1127,7 @@
             });
           })
           .then(function (result) {
+            form.dataset.bsSubmitting = '';
             if (result.ok && result.json.success) {
               form.reset();
               if (submitButton) {
@@ -1069,9 +1135,11 @@
                 submitButton.style.background = '#2d6a4f';
               }
 
-              // Google Ads conversion — fires only after contact.php confirms the submission
+              // Google Ads conversion — fires once, only after contact.php has
+              // confirmed the enquiry was processed successfully. The one-time
+              // submission_id returned by the backend prevents duplicates.
               if (typeof window.trackSubmitLeadFormConversion === 'function') {
-                window.trackSubmitLeadFormConversion();
+                window.trackSubmitLeadFormConversion(result.json.submission_id);
               }
 
               setTimeout(function () {
@@ -1098,6 +1166,7 @@
             }
           })
           .catch(function () {
+            form.dataset.bsSubmitting = '';
             if (submitButton) {
               submitButton.classList.remove('is-submitting');
               submitButton.disabled = false;
