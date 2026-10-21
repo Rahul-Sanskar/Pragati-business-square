@@ -2,6 +2,25 @@
 <html lang="en">
   
 <head>
+    <!-- Google tag (gtag.js) — Google Ads AW-18471400653 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18471400653"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18471400653');
+
+      // Google Ads conversion — "Submit lead form"
+      // Replace PLACEHOLDER_LABEL with the conversion label from Google Ads
+      // (Goals → Conversions → "Submit lead form" → Tag setup).
+      window.BS_ADS_SUBMIT_LEAD_SEND_TO = 'AW-18471400653/PLACEHOLDER_LABEL';
+
+      // Called only after the enquiry form is confirmed submitted by contact.php
+      window.trackSubmitLeadFormConversion = function () {
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'conversion', { send_to: window.BS_ADS_SUBMIT_LEAD_SEND_TO });
+      };
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Commercial Property in Nerul MIDC | The Business Square | ₹1 Crore onwards</title>
@@ -1022,25 +1041,23 @@
     <script src="cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="js/script2b04.js?var=0.1"></script>
     <script>
-      document.querySelectorAll('.modal-form').forEach(function (form) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (!form.checkValidity()) return;
+      // Shared enquiry submit flow — used by the inline enquiry card form and by
+      // the modal form cloned from #leadFormTemplate at runtime.
+      function submitEnquiryForm(form) {
+        const submitButton = form.querySelector('.modal-form__submit');
+        if (submitButton) {
+          submitButton.classList.add('is-submitting');
+          submitButton.disabled = true;
+          submitButton.textContent = 'Submitting...';
+        }
 
-          const submitButton = form.querySelector('.modal-form__submit');
-          if (submitButton) {
-            submitButton.classList.add('is-submitting');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-          }
-
-          const data = new FormData(form);
-          fetch('contact.php', {
-            method: 'POST',
-            body: data,
-          })
+        const data = new FormData(form);
+        fetch('contact.php', {
+          method: 'POST',
+          body: data,
+        })
           .then(function (response) {
-            return response.json().then(function(json) {
+            return response.json().then(function (json) {
               return { ok: response.ok, json: json };
             });
           })
@@ -1051,6 +1068,12 @@
                 submitButton.textContent = '✓ Submitted!';
                 submitButton.style.background = '#2d6a4f';
               }
+
+              // Google Ads conversion — fires only after contact.php confirms the submission
+              if (typeof window.trackSubmitLeadFormConversion === 'function') {
+                window.trackSubmitLeadFormConversion();
+              }
+
               setTimeout(function () {
                 var modal = form.closest('.modal');
                 if (modal) {
@@ -1082,7 +1105,14 @@
             }
             alert('Network error. Please check your connection and try again.');
           });
-        });
+      }
+
+      document.addEventListener('submit', function (e) {
+        const form = e.target && e.target.closest ? e.target.closest('form.modal-form') : null;
+        if (!form) return;
+        e.preventDefault();
+        if (!form.checkValidity()) return;
+        submitEnquiryForm(form);
       });
 
 
